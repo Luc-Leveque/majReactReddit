@@ -20,6 +20,6 @@ const Avatar = styled.img`
   width: ${props => `${props.width}px`};
   height: ${props => `${props.width}px`};
   border-radius: 30px;
-  margin: 0px:
+  margin: 0px;
 `
 export default Icon

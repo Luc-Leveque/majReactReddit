@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
-import Icon from '../components/icon'
 import Post from '../components/post'
 import PostRow from '../components/postRow'
 import DataPost from '../data/post.json'
@@ -33,7 +32,6 @@ const Home = () => {
         ></PostRow>
       ))}
       <Post submit={submit}></Post>
-      <Icon></Icon>
     </div>
   )
 }
