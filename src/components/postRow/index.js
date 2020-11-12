@@ -5,19 +5,21 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from '../icon'
 import { Link } from 'react-router-dom'
+import LikeDislike from '../likeDislike'
 
 const PostRow = props => {
   return (
-    <StyledLink to={`/post/${props.id}`}>
-      <PostContainer>
+    <PostContainer>
+      <StyledLink to={`/post/${props.id}`}>
         <AuthorPost>Posted by u/{props.author}</AuthorPost>
         <PostHeaderContainer>
           <Icon width={25}></Icon>
           <HeaderPost>{props.title}</HeaderPost>
         </PostHeaderContainer>
         <BodyPost>{props.message}</BodyPost>
-      </PostContainer>
-    </StyledLink>
+      </StyledLink>
+      <LikeDislike id={props.id} like={props.like}></LikeDislike>
+    </PostContainer>
   )
 }
 
@@ -25,7 +27,8 @@ PostRow.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   message: PropTypes.string,
-  author: PropTypes.string
+  author: PropTypes.string,
+  like: PropTypes.bool
 }
 
 const StyledLink = styled(Link)`
@@ -71,6 +74,7 @@ const HeaderPost = styled.h4`
 
 const BodyPost = styled.p`
   color: #6f7071;
+  font-size: 1em;
 `
 
 export default PostRow

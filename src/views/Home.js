@@ -29,6 +29,7 @@ const Home = () => {
           title={post.title}
           message={post.message}
           author={post.author}
+          like={post.like}
         ></PostRow>
       ))}
       <Post submit={submit}></Post>
