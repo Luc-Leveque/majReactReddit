@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const handleLikeDislike = (id, likeOrDislike) => {
+const handleLikeDislike = (
+  id,
+  likeOrDislike,
+  setColorLike,
+  setColorDislike
+) => {
   const currentPost = JSON.parse(localStorage.getItem('post')) ?? []
 
   currentPost.map(post => {
@@ -12,12 +17,13 @@ const handleLikeDislike = (id, likeOrDislike) => {
     }
   })
   localStorage.setItem('post', JSON.stringify(currentPost))
-  window.location.reload(false)
+  setColorLike(defineColorArrow(likeOrDislike, true))
+  setColorDislike(defineColorArrow(likeOrDislike, false))
 }
 
 const defineColorArrow = (like, likeOrDislike) => {
   if (typeof like === 'undefined') {
-    return ''
+    return '#000000'
   }
   if (like && likeOrDislike) {
     return 'Tomato'
@@ -25,18 +31,31 @@ const defineColorArrow = (like, likeOrDislike) => {
   if (!like && !likeOrDislike) {
     return 'Dodgerblue'
   }
-  return ''
+  return '#000000'
 }
 
 const LikeDislike = ({ id, like }) => {
+  const [colorLike, setColorLike] = useState(defineColorArrow(like, true))
+  const [colorDislike, setColorDislike] = useState(
+    defineColorArrow(like, false)
+  )
+
   return (
     <LikeDislikeContainer>
-      <Button onClick={() => handleLikeDislike(id, true)}>
-        <FaArrowUp color={defineColorArrow(like, true)} />
+      <Button
+        onClick={() =>
+          handleLikeDislike(id, true, setColorLike, setColorDislike)
+        }
+      >
+        <FaArrowUp color={colorLike} />
       </Button>
       <Vote>Vote</Vote>
-      <Button onClick={() => handleLikeDislike(id, false)}>
-        <FaArrowDown color={defineColorArrow(like, false)} />
+      <Button
+        onClick={() =>
+          handleLikeDislike(id, false, setColorLike, setColorDislike)
+        }
+      >
+        <FaArrowDown color={colorDislike} />
       </Button>
     </LikeDislikeContainer>
   )
