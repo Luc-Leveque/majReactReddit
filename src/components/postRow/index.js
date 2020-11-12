@@ -22,7 +22,7 @@ const PostRow = props => {
 }
 
 PostRow.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   title: PropTypes.string,
   message: PropTypes.string,
   author: PropTypes.string
